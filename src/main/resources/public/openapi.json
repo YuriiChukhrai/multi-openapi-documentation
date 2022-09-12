@@ -1,0 +1,417 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "HTTP status code demo.",
+    "description": "HTTP status codes demo API. Spring Boot. Demo project for portfolio. Yurii Chukhrai.",
+    "license": {
+      "name": "Apache 2.0",
+      "url": "http://springdoc.org"
+    },
+    "version": "0.0.6-SNAPSHOT"
+  },
+  "externalDocs": {
+    "description": "Author GitHub",
+    "url": "https://github.com/YuriiChukhrai/http-status-codes-demo"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:7777",
+      "description": "Generated server url"
+    }
+  ],
+  "paths": {
+    "/api/v1/http/code/{id}": {
+      "get": {
+        "tags": [
+          "http-code-controller-impl"
+        ],
+        "summary": "Get HTTP code description by ID in DB",
+        "operationId": "getHttpCodeById",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "default response",
+            "content": {
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/HttpCode"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HttpCode"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "http-code-controller-impl"
+        ],
+        "summary": "Put/Update HTTP code by ID ",
+        "operationId": "putHttpCode",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/HttpCode"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "default": {
+            "description": "default response",
+            "content": {
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/HttpCode"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HttpCode"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "http-code-controller-impl"
+        ],
+        "summary": "Delete HTTP code by ID",
+        "operationId": "deleteHttpCode",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/v1/http/code": {
+      "post": {
+        "tags": [
+          "http-code-controller-impl"
+        ],
+        "summary": "Save HTTP code",
+        "operationId": "saveHttpCode",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/HttpCode"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "default": {
+            "description": "default response",
+            "content": {
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/HttpCode"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HttpCode"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/info/": {
+      "get": {
+        "tags": [
+          "info-controller"
+        ],
+        "summary": "Get information about the project",
+        "description": "Get broad information about the project, what is the current version, etc.",
+        "operationId": "getGeneralInformation",
+        "responses": {
+          "200": {
+            "description": "ok, successful operation",
+            "content": {
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/Info"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Info"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/http/code/info": {
+      "get": {
+        "tags": [
+          "http-code-controller-impl"
+        ],
+        "summary": "Get HTTP code descriptions by the category",
+        "operationId": "findHttpCodesByCategory_1",
+        "parameters": [
+          {
+            "name": "reason_phrase",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "code",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "category",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "default response",
+            "content": {
+              "application/xml": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/HttpCode"
+                      }
+                    },
+                    {
+                      "$ref": "#/components/schemas/HttpCode"
+                    }
+                  ]
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/HttpCode"
+                      }
+                    },
+                    {
+                      "$ref": "#/components/schemas/HttpCode"
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/http/code/info/all": {
+      "get": {
+        "tags": [
+          "http-code-controller-impl"
+        ],
+        "summary": "Get all HTTP codes",
+        "description": "Returns a list of all HTTP codes in DB",
+        "operationId": "getAllHttpCodes",
+        "responses": {
+          "default": {
+            "description": "default response",
+            "content": {
+              "application/xml": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/HttpCode"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/HttpCode"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/http/code/example/{code}": {
+      "get": {
+        "tags": [
+          "example-response-controller"
+        ],
+        "summary": "Simulate the HTTP code",
+        "description": "The endpoint send description of requested HTT code and set that code for response too.",
+        "operationId": "getResponseEntityById",
+        "parameters": [
+          {
+            "name": "code",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "default response",
+            "content": {
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/HttpCode"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HttpCode"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "HttpCode": {
+        "required": [
+          "category",
+          "code",
+          "id",
+          "reason_phrase"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "DB unique primary key",
+            "format": "int64"
+          },
+          "code": {
+            "maximum": 599,
+            "minimum": 0,
+            "type": "integer",
+            "description": "The status-code element is a three-digit integer code giving the result of the attempt to understand and satisfy the request. The first digit of the status-code defines the class of response. The last two digits do not have any categorization role.",
+            "format": "int32",
+            "example": 203
+          },
+          "category": {
+            "maxLength": 20,
+            "minLength": 0,
+            "type": "string",
+            "description": "Category of HTTP code",
+            "example": "Success"
+          },
+          "reason_phrase": {
+            "maxLength": 50,
+            "minLength": 0,
+            "type": "string",
+            "description": "The reason phrases listed here are only recommendations -- they can be replaced by local equivalents without affecting the protocol.",
+            "example": "Non-authoritative Information"
+          },
+          "definition": {
+            "maxLength": 1000,
+            "minLength": 0,
+            "type": "string"
+          }
+        },
+        "description": "Representation of model Request/Response"
+      },
+      "Info": {
+        "type": "object",
+        "properties": {
+          "app_name": {
+            "type": "string"
+          },
+          "app_version": {
+            "type": "string"
+          },
+          "http_codes_size": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "dev": {
+            "type": "string"
+          },
+          "e_mail": {
+            "type": "string"
+          },
+          "git_hub_url": {
+            "type": "string"
+          },
+          "linkedin_url": {
+            "type": "string"
+          },
+          "swagger_url": {
+            "type": "string"
+          },
+          "openapi_url": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  }
+}
