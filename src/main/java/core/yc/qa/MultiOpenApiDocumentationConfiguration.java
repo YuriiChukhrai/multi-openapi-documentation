@@ -16,6 +16,7 @@ import springfox.documentation.service.Contact;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * @author limit (Yurii Chukhrai)
@@ -28,13 +29,15 @@ public class MultiOpenApiDocumentationConfiguration {
     public SwaggerResourcesProvider swaggerResourcesProvider(final InMemorySwaggerResourcesProvider defaultResourcesProvider) {
 
         return () -> {
-            final SwaggerResource demoResource = new SwaggerResource();
-            demoResource.setName("Open API");
-            demoResource.setSwaggerVersion("3.0.0");
-            demoResource.setLocation("/openapi.json"); //src/main/resources/public/openapi.json
+//            final SwaggerResource demoResource = new SwaggerResource();
+//            demoResource.setName("Open API");
+//            demoResource.setSwaggerVersion("3.0.0");
+//            demoResource.setLocation("/openapi.json"); //src/main/resources/public/openapi.json
 
             final List<SwaggerResource> resources = new ArrayList<>(defaultResourcesProvider.get());
-            resources.add(demoResource);
+            resources.add(getSwaggerResource("Open API",  "2.0", "/openapi.json", null));//demoResource
+            resources.add(getSwaggerResource("External API", "3.0", "/v3/api-docs", "http://localhost:7777"));
+
             return resources;
         };
     }
@@ -54,7 +57,25 @@ public class MultiOpenApiDocumentationConfiguration {
                 null, null, Collections.emptyList());
     }
 
-    /**
-     * TBD - runtime fetching information from another microservices.
-     * */
+    //resources.add(swaggerResource("account-service", "/api/account/v2/api-docs", "2.0"));
+
+    private SwaggerResource getSwaggerResource(final String name, final String version, final String location, final String uri) {
+        final SwaggerResource swaggerResource = new SwaggerResource();
+        swaggerResource.setName(name);
+        swaggerResource.setLocation(location);
+        swaggerResource.setSwaggerVersion(version);
+
+        /**
+         * BUG: swagger-ui should respect absolute paths provided by swagger-resources
+         *
+         * https://github.com/springfox/springfox/issues/3413
+         * https://github.com/springfox/springfox/pull/3596/files
+         * https://github.com/ballcat-projects/ballcat-samples/blob/master/ballcat-sample-admin-application/src/main/resources/META-INF/resources/webjars/springfox-swagger-ui/springfox.js
+         * */
+        if(Objects.nonNull(uri)){
+            swaggerResource.setUrl(uri);
+        }
+
+        return swaggerResource;
+    }
 }

@@ -29,7 +29,12 @@ ___
 
 ### 1 Documentation
 
-####  1.1 Open API
+####  1.1 SpringFox
+Springfox is a framework that acts as the “glue” between Swagger and Spring. 
+It generates the specification (contract) based on your code and also deploys 
+the Swagger UI client with your application, allowing you to immediately test your REST API.
+
+####  1.2 Open API
 
 The ability of APIs to describe their own structure is the root of all
 awesomeness in OpenAPI. Once written, an OpenAPI specification and
@@ -52,7 +57,7 @@ We can simply access the Open API documentation at:
 default)
 
 
-###  1.2 Swagger UI
+###  1.3 Swagger UI
 
 Swagger is a set of open-source tools built around the OpenAPI
 Specification that can help you design, build, document and consume REST
@@ -73,5 +78,14 @@ that lets your users try out the API calls directly in the browser.
 ## References
 * [SwaggerResourceConfig.kt](https://gist.github.com/brunapereira/52033b00a81ad885a60c2950eb371fb3#file-swaggerresourceconfig-kt)
 * [Remove Basic Error Controller In SpringFox Swagger-UI](https://www.baeldung.com/spring-swagger-remove-error-controller)
+* [Spring Doc](https://springdoc.org/#Introduction)
+* [Swagger](https://swagger.io/docs/specification/about)
+* [OpenAPI Specifications](https://medium.com/creditas-tech/open-api-specifications-with-your-api-rest-spring-boot-17951e9c22a0)
+* [Spring Fox GitHub](https://github.com/springfox/springfox)
 * [postman-to-openapi](https://joolfe.github.io/postman-to-openapi/)
 * [Postman2OpenAPI](https://github.com/kevinswiber/postman2openapi)
+* [SpringFox](https://dimitr.im/documenting-rest-api-swagger-springfox)
+
+
+
+
