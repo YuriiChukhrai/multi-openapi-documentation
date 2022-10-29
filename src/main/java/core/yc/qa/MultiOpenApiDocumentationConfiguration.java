@@ -27,13 +27,7 @@ public class MultiOpenApiDocumentationConfiguration {
     @Primary
     @Bean
     public SwaggerResourcesProvider swaggerResourcesProvider(final InMemorySwaggerResourcesProvider defaultResourcesProvider) {
-
         return () -> {
-//            final SwaggerResource demoResource = new SwaggerResource();
-//            demoResource.setName("Open API");
-//            demoResource.setSwaggerVersion("3.0.0");
-//            demoResource.setLocation("/openapi.json"); //src/main/resources/public/openapi.json
-
             final List<SwaggerResource> resources = new ArrayList<>(defaultResourcesProvider.get());
             resources.add(getSwaggerResource("Open API",  "2.0", "/openapi.json", null));//demoResource
             resources.add(getSwaggerResource("External API", "3.0", "/v3/api-docs", "http://localhost:7777"));
@@ -56,8 +50,6 @@ public class MultiOpenApiDocumentationConfiguration {
                 new Contact("Yurii Chukhrai", "https://github.com/YuriiChukhrai", "yurii.chukhrai@outlook.com"),
                 null, null, Collections.emptyList());
     }
-
-    //resources.add(swaggerResource("account-service", "/api/account/v2/api-docs", "2.0"));
 
     private SwaggerResource getSwaggerResource(final String name, final String version, final String location, final String uri) {
         final SwaggerResource swaggerResource = new SwaggerResource();

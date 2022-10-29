@@ -7,9 +7,6 @@ Make sure you have installed on your operating system:<br/>
 3. [Maven](https://maven.apache.org/)
 
 
-## Run Spring App.
-`$> mvn clean spring-boot:run ` - command to start standalone application using Maven.
-
 ## Swagger UI
 In your example the documentation will be available by next URL's:</br>
 - http://localhost:7778/v2/api-docs - OpenAPI JSON. Information about the current project.</br></br>
@@ -18,13 +15,25 @@ In your example the documentation will be available by next URL's:</br>
 **Swagger:** http://server:port/context-path/swagger-ui.html</br>
 **OpenAPI:** http://server:port/context-path/v3/api-docs
 
+## 2.0 Running
+
+### Run using Maven
+
+`$> mvn clean spring-boot:run -Dspring-boot.run.profiles=[{provile: local, dev, prod}]`</br>
+OR</br>
+`$> mvn spring-boot:run -Dspring-boot.run.profiles=local,prod`
+
+### Run using JAR
+`$> mvn clean package -Dmaven.test.skip=true` - generate JAR artifact</br>
+`$> java -Dspring.profiles.active=local,prod -jar ./target/multi-openapi-documentation.jar` - run service</br>
+
+
 ## TBD
-Add online integration from running services.
+Add online integration from external running services.
 
 ___
 
 ## Intro
-
 
 
 ### 1 Documentation
@@ -33,6 +42,7 @@ ___
 Springfox is a framework that acts as the “glue” between Swagger and Spring. 
 It generates the specification (contract) based on your code and also deploys 
 the Swagger UI client with your application, allowing you to immediately test your REST API.
+
 
 ####  1.2 Open API
 
@@ -43,13 +53,18 @@ Swagger tools can drive your API development further in various ways.
 ![OpenAPI. Bean](./doc/MultiOpenApiDocumentationConfiguration.png)
 **_Pic#1_**. Spring Boot configuration Bean for OpenAPI/Swagger documentation
 
+On the line 32 we are reading information about some of API from JSON file. 
+You can have multiple files related to the different projects, and they will be available in Swagger UI.
+To generate **openapi.json** from Postam collections you can use these two projects:
+ * [postman-to-openapi](https://joolfe.github.io/postman-to-openapi/)
+ * [Postman2OpenAPI](https://github.com/kevinswiber/postman2openapi)
 
 We can simply access the Open API documentation at:
 
 ***URL (JSON):** http://localhost:7778/v2/api-docs*
 
 
-**In out case we do not have any REST controllers, so It will be contact info only.**
+**In our case we do not have any REST controllers, so It will be contact info only :)**
 
 
 ![OpenAPI. JSON](./doc/open-api-firefox.png)
@@ -72,7 +87,7 @@ that lets your users try out the API calls directly in the browser.
 
 
 ![Swagger UI](./doc/swagger-uploaded.png)
-**_Pic#4_**. Swagger UI. Uploaded project from `src/main/resources/public/openapi.json`
+**_Pic#4_**. Swagger UI. Uploaded project API information from `src/main/resources/public/openapi.json`
 
 
 ## References
