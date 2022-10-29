@@ -1,4 +1,4 @@
-# http-status-codes
+# multi-openapi-documentation
 
 ## Dependencies
 Make sure you have installed on your operating system:<br/>
